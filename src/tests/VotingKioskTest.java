@@ -33,6 +33,7 @@ public class VotingKioskTest {
         assertEquals(0,voteCounter.getVotesFor(anotherParty));
 
         // Case when vote is blank
+        assertEquals(1, voteCounter.getBlanks());
 
         // Case when vote is null
 
