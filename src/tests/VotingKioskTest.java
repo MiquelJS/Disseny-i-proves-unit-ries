@@ -15,14 +15,27 @@ public class VotingKioskTest {
 
     @Test
     void voteTest() throws NoPartyException {
-        VotingKiosk votingKiosk = new VotingKiosk();
-        Party party = new Party("VOX");
+        Party votedParty = new Party("VOX");
         Party anotherParty = new Party("ERC");
+        Party nonExistingParty = new Party("PACMA");
+
+        VotingKiosk votingKiosk = new VotingKiosk(new HashSet<>(Arrays.asList(votedParty,anotherParty)));
+
+        votingKiosk.vote(votedParty);
+        votingKiosk.vote(new Party(""));
+        votingKiosk.vote(new Party("null"));
+        VoteCounter voteCounter = votingKiosk.voteCounter;
 
         // Case when the vote is scrutinized correctly
-        votingKiosk.vote(party);
-        VoteCounter voteCounter = votingKiosk.voteCounter;
-        assertEquals(1,voteCounter.getVotesFor(party));
+        assertEquals(1,voteCounter.getVotesFor(votedParty));
+
+        // Case when a party is not voted
+        assertEquals(0,voteCounter.getVotesFor(anotherParty));
+
+        // Case when vote is blank
+
+        // Case when vote is null
+
 
         // Case when the vote is on a party that is not in the valid parties
         /*votingKiosk.vote(anotherParty);
