@@ -42,5 +42,8 @@ public class VotingKioskTest {
         // Case when the vote is on a party that is not in the valid parties
         assertThrows(NoPartyException.class, () -> votingKiosk.vote(nonExistingParty));
 
+        // Check if all the votes are scrutinized correctly
+        assertEquals(4, voteCounter.getTotal());
+
     }
 }
