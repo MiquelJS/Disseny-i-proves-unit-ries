@@ -1,9 +1,11 @@
+package data;
+
 import java.util.Objects;
 
-public final class MailAdress {
+public final class MailAddress {
     private final String Mail;
 
-    public MailAdress(String mail) {
+    public MailAddress(String mail) {
         Mail = mail;
     }
 
@@ -15,7 +17,7 @@ public final class MailAdress {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MailAdress that = (MailAdress) o;
+        MailAddress that = (MailAddress) o;
         return Objects.equals(Mail, that.Mail);
     }
 
@@ -26,7 +28,7 @@ public final class MailAdress {
 
     @Override
     public String toString() {
-        return "MailAdress{" +
+        return "data.MailAddress{" +
                 "Mail='" + Mail + '\'' +
                 '}';
     }

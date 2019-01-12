@@ -13,12 +13,13 @@ public class VoteCounter {
     private int blankVotes = 0;
 
     public VoteCounter(Set<Party> validParties) { this.validParties = validParties; }
-    private void countParty(Party party) throws NoPartyException {
+
+    public void countParty(Party party) throws NoPartyException {
         if (validParties.contains(party)) { this.partyVotes++; }
         else { throw new NoPartyException(); }
     }
-    private void countNull() { this.nullVotes++; }
-    private void countBlank() { this.blankVotes++; }
+    public void countNull() { this.nullVotes++; }
+    public void countBlank() { this.blankVotes++; }
     public void scrutinize(Party party) throws NoPartyException {
         if (party.getName().equals("null")) { countNull(); }
         else if (party.getName().equals("")) { countBlank(); }

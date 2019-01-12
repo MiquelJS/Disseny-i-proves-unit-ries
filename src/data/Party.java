@@ -3,6 +3,7 @@ package data;
  * The name of a party that participates in an election.
  */
 final public class Party {
+
     private final String name;
     public Party(String name) { this.name = name; }
     public String getName() { return name; }
