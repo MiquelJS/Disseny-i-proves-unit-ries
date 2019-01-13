@@ -23,8 +23,8 @@ public class ElectoralOrganismTest {
     }
 
     @Test
-    void canVoteTest() {
-
+    void canVoteTest() throws IncorrectNifException {
+        assertTrue(eO.canVote(new Nif("48250721X")));
     }
 
     @Test
