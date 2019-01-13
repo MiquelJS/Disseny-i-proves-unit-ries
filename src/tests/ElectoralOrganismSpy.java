@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ElectoralOrganismSpy implements ElectoralOrganism {
 
-    public ArrayList<Nif> voted = new ArrayList<Nif>();
+    public ArrayList<Nif> voted = new ArrayList<>();
 
     @Override
     public boolean canVote(Nif nif) {

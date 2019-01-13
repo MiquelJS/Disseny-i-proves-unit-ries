@@ -4,56 +4,48 @@ import static org.junit.jupiter.api.Assertions.*;
 import data.MailAddress;
 import data.Nif;
 import data.Party;
+import exceptions.CantVoteException;
 import exceptions.NoPartyException;
 import kiosk.VoteCounter;
 import kiosk.VotingKiosk;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 public class VotingKioskTest {
 
+    private Party votedParty;
+    private VotingKiosk votingKiosk;
+
+    @BeforeEach
+    void set() {
+        this.votedParty = new Party("ERC");
+        Party anotherParty = new Party("VOX");
+
+        this.votingKiosk = new VotingKiosk(new HashSet<>(Arrays.asList(votedParty,anotherParty)));
+        this.votingKiosk.setElectoralOrganism(new ElectoralOrganismSpy());
+    }
+
     @Test
-    void voteTest() throws NoPartyException {
-
-        Party votedParty = new Party("VOX");
-        Party anotherParty = new Party("ERC");
-        Party nonExistingParty = new Party("PACMA");
-
-        VotingKiosk votingKiosk = new VotingKiosk(new HashSet<>(Arrays.asList(votedParty,anotherParty)));
-        votingKiosk.setElectoralOrganism(new ElectoralOrganismSpy());
-
+    void votedSuccessfully() throws NoPartyException, CantVoteException {
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(votedParty);
-        votingKiosk.setNif(new Nif("12345678A"));
-        votingKiosk.vote(new Party(""));
-        votingKiosk.setNif(new Nif("98765432Q"));
-        votingKiosk.vote(new Party("null"));
-        votingKiosk.setNif(new Nif("44444444A"));
-        votingKiosk.vote(new Party("null"));
+        assertTrue(votingKiosk.votedSuccessfully);
+    }
 
-        VoteCounter voteCounter = votingKiosk.voteCounter;
-
-        // Case when the vote is scrutinized correctly
-        assertEquals(1,voteCounter.getVotesFor(votedParty));
-
-        // Case when a party is not voted
-        assertEquals(0,voteCounter.getVotesFor(anotherParty));
-
-        // Case when vote is blank
-        assertEquals(1, voteCounter.getBlanks());
-
-        // Case when vote is null
-        assertEquals(2,voteCounter.getNulls());
-
-        // Case when the vote is on a party that is not in the valid parties
-        votingKiosk.setNif(new Nif("77777777B"));
+    @Test
+    void voteNonExitingParty() {
+        Party nonExistingParty = new Party("Perico");
         assertThrows(NoPartyException.class, () -> votingKiosk.vote(nonExistingParty));
+    }
 
-        // Check if all the votes are scrutinized correctly
-        assertEquals(4, voteCounter.getTotal());
+    @Test
+    void voteWithTheSameNif() throws NoPartyException, CantVoteException {
+        votingKiosk.setNif(new Nif("48250721X"));
+        votingKiosk.vote(votedParty);
+        assertThrows(CantVoteException.class, () -> votingKiosk.vote(votedParty));
     }
 
     @Test
