@@ -1,6 +1,7 @@
 package tests;
 
 import data.Nif;
+import data.Party;
 import exceptions.IncorrectNifException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,5 +33,12 @@ public class ElectoralOrganismTest {
         Nif nif = new Nif("48250721X");
         eO.disableVoter(nif);
         assertFalse(eO.canVote(nif));
+    }
+
+    @Test
+    void askForDigitalSignatureTest() {
+        Party party = new Party("Cs");
+        eO.askForDigitalSignature(party);
+        assertEquals("Digital Signature for Cs", eO.digitalSignature);
     }
 }

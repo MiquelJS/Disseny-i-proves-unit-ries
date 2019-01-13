@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ElectoralOrganismSpy implements ElectoralOrganism {
 
     public ArrayList<Nif> voted = new ArrayList<>();
+    public String digitalSignature;
 
     @Override
     public boolean canVote(Nif nif) {
@@ -25,6 +26,7 @@ public class ElectoralOrganismSpy implements ElectoralOrganism {
     @Override
     public DigitalSignature askForDigitalSignature(Party party) {
         String s = "Digital Signature for ";
+        digitalSignature = s.concat(party.getName());
         return new DigitalSignature(s.concat(party.getName()).getBytes());
     }
 }
