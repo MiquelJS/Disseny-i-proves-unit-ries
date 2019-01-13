@@ -16,8 +16,8 @@ public class VoteCounter {
 
     public VoteCounter(Set<Party> validParties) {
         this.validParties = validParties;
-        this.partiesVotes = new ArrayList<Integer>();
-        for (Party party : validParties) {
+        this.partiesVotes = new ArrayList<>();
+        for (Party ignored : validParties) {
             this.partiesVotes.add(0);
         }
     }
