@@ -58,6 +58,20 @@ public class VoteCounterTest {
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(new Party("null"));
         VoteCounter voteCounter = votingKiosk.voteCounter;
-        assertEquals(1, voteCounter.getBlanks());
+        assertEquals(1, voteCounter.getNulls());
+    }
+
+    @Test
+    void totalVotesTest() throws NoPartyException, CantVoteException {
+        votingKiosk.setNif(new Nif("48250721X"));
+        votingKiosk.vote(votedParty);
+        votingKiosk.setNif(new Nif("44444444A"));
+        votingKiosk.vote(anotherParty);
+        votingKiosk.setNif(new Nif("77777777B"));
+        votingKiosk.vote(anotherParty);
+        votingKiosk.setNif(new Nif("88888888Y"));
+        votingKiosk.vote(votedParty);
+        assertEquals(4,voteCounter.getTotal());
+
     }
 }
