@@ -65,8 +65,9 @@ public class VotingKioskTest {
         votingKiosk.setMailerService(mss);
         votingKiosk.setPartyToSign(new Party("Miquel's potatoes"));
 
-        votingKiosk.sendeReceipt(new MailAddress("mjs2@alumnes.udl.cat"));
+        MailAddress mailAddress = new MailAddress("mjs2@alumnes.udl.cat");
+        votingKiosk.sendeReceipt(mailAddress);
 
-        assertTrue(mss.sentMail);
+        assertEquals(mailAddress,mss.mailAddress);
     }
 }

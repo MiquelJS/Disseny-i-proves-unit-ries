@@ -6,9 +6,10 @@ import services.MailerService;
 
 public class MailerServiceSpy implements MailerService {
 
-    public boolean sentMail = false;
+    public MailAddress mailAddress;
+
     @Override
     public void send(MailAddress address, DigitalSignature signature) {
-        this.sentMail = true;
+        this.mailAddress = address;
     }
 }
