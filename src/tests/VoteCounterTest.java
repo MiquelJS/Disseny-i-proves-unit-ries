@@ -1,8 +1,6 @@
 package tests;
 
 import data.Party;
-import exceptions.CantVoteException;
-import exceptions.IncorrectNifException;
 import exceptions.NoPartyException;
 import kiosk.VoteCounter;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,8 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VoteCounterTest {
 
@@ -52,7 +49,12 @@ public class VoteCounterTest {
     }
 
     @Test
-    void totalVotesTest() throws NoPartyException, CantVoteException, IncorrectNifException {
+    void voteNonExistingParty() {
+        assertThrows(NoPartyException.class, () -> voteCounter.scrutinize(new Party("Pepito")));
+    }
+
+    @Test
+    void totalVotesTest() throws NoPartyException {
         voteCounter.scrutinize(votedParty);
         voteCounter.scrutinize(anotherParty);
         voteCounter.scrutinize(new Party(""));

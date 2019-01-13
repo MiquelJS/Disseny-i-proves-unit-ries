@@ -7,7 +7,6 @@ import data.Party;
 import exceptions.CantVoteException;
 import exceptions.IncorrectNifException;
 import exceptions.NoPartyException;
-import kiosk.VoteCounter;
 import kiosk.VotingKiosk;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,6 @@ public class VotingKioskTest {
         Party anotherParty = new Party("VOX");
 
         this.votingKiosk = new VotingKiosk(new HashSet<>(Arrays.asList(votedParty,anotherParty)));
-        this.votingKiosk.setElectoralOrganism(new ElectoralOrganismSpy());
     }
 
     @Test
@@ -51,7 +49,6 @@ public class VotingKioskTest {
 
     @Test
     void sendReceiptTest() {
-        VotingKiosk votingKiosk = new VotingKiosk();
         ElectoralOrganismSpy eos = new ElectoralOrganismSpy();
         MailerServiceSpy mss = new MailerServiceSpy();
         votingKiosk.setElectoralOrganism(eos);
