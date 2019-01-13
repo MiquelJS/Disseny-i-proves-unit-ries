@@ -1,4 +1,4 @@
-package tests;
+package mocks;
 
 import data.DigitalSignature;
 import data.Nif;

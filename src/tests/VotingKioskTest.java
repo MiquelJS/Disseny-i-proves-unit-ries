@@ -7,11 +7,12 @@ import data.Party;
 import exceptions.NoPartyException;
 import kiosk.VoteCounter;
 import kiosk.VotingKiosk;
+import mocks.ElectoralOrganismSpy;
+import mocks.MailerServiceSpy;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 public class VotingKioskTest {
 
