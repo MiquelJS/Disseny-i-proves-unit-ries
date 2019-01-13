@@ -1,5 +1,7 @@
 package services;
 
+import data.DigitalSignature;
+import data.Nif;
 import data.Party;
 
 /**

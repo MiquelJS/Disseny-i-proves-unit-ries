@@ -1,3 +1,5 @@
+package data;
+
 import java.util.Arrays;
 
 public final class DigitalSignature {
@@ -26,8 +28,8 @@ public final class DigitalSignature {
 
     @Override
     public String toString() {
-        return "DigitalSignature{" +
-                "DigitalSignature=" + Arrays.toString(DigitalSignature) +
+        return "data.DigitalSignature{" +
+                "data.DigitalSignature=" + Arrays.toString(DigitalSignature) +
                 '}';
     }
 }

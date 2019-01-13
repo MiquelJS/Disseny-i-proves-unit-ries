@@ -1,4 +1,4 @@
-import data.Party;
+package data;
 
 import java.util.Objects;
 
@@ -29,8 +29,8 @@ public final class Nif {
 
     @Override
     public String toString() {
-        return "Nif{" +
-                "Nif='" + Nif + '\'' +
+        return "data.Nif{" +
+                "data.Nif='" + Nif + '\'' +
                 '}';
     }
 }
