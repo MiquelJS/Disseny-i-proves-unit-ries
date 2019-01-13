@@ -35,11 +35,13 @@ public class VoteCounter {
     }
     public void countNull() { this.nullVotes++; }
     public void countBlank() { this.blankVotes++; }
+
     public void scrutinize(Party party) throws NoPartyException {
         if (party.getName().equals("null")) { countNull(); }
         else if (party.getName().equals("")) { countBlank(); }
         else { countParty(party); }
     }
+
     public int getVotesFor(Party party) throws NoPartyException {
         if (validParties.contains(party)) {
             return partiesVotes.get(getIndexOfParty(party));
