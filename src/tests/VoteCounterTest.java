@@ -3,6 +3,7 @@ package tests;
 import data.Nif;
 import data.Party;
 import exceptions.CantVoteException;
+import exceptions.IncorrectNifException;
 import exceptions.NoPartyException;
 import kiosk.VoteCounter;
 import kiosk.VotingKiosk;
@@ -32,7 +33,7 @@ public class VoteCounterTest {
     }
 
     @Test
-    void votePartyTest() throws NoPartyException, CantVoteException {
+    void votePartyTest() throws NoPartyException, CantVoteException, IncorrectNifException {
 
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(votedParty);
@@ -45,7 +46,7 @@ public class VoteCounterTest {
     }
 
     @Test
-    void blankVoteTest() throws NoPartyException, CantVoteException {
+    void blankVoteTest() throws NoPartyException, CantVoteException, IncorrectNifException {
 
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(new Party(""));
@@ -53,7 +54,7 @@ public class VoteCounterTest {
     }
 
     @Test
-    void nullVoteTest() throws NoPartyException, CantVoteException {
+    void nullVoteTest() throws NoPartyException, CantVoteException, IncorrectNifException {
 
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(new Party("null"));
@@ -62,7 +63,7 @@ public class VoteCounterTest {
     }
 
     @Test
-    void totalVotesTest() throws NoPartyException, CantVoteException {
+    void totalVotesTest() throws NoPartyException, CantVoteException, IncorrectNifException {
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(votedParty);
         votingKiosk.setNif(new Nif("44444444A"));

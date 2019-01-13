@@ -5,6 +5,7 @@ import data.MailAddress;
 import data.Nif;
 import data.Party;
 import exceptions.CantVoteException;
+import exceptions.IncorrectNifException;
 import exceptions.NoPartyException;
 import kiosk.VoteCounter;
 import kiosk.VotingKiosk;
@@ -29,7 +30,7 @@ public class VotingKioskTest {
     }
 
     @Test
-    void votedSuccessfully() throws NoPartyException, CantVoteException {
+    void votedSuccessfully() throws NoPartyException, CantVoteException, IncorrectNifException {
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(votedParty);
         assertTrue(votingKiosk.votedSuccessfully);
@@ -42,7 +43,7 @@ public class VotingKioskTest {
     }
 
     @Test
-    void voteWithTheSameNif() throws NoPartyException, CantVoteException {
+    void voteWithTheSameNif() throws NoPartyException, CantVoteException, IncorrectNifException {
         votingKiosk.setNif(new Nif("48250721X"));
         votingKiosk.vote(votedParty);
         assertThrows(CantVoteException.class, () -> votingKiosk.vote(votedParty));

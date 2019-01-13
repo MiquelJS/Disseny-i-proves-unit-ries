@@ -1,13 +1,22 @@
 package data;
 
+import exceptions.IncorrectNifException;
+
 import java.util.Objects;
 
 public final class Nif {
 
     private final String Nif;
+    public boolean correctNif = false;
 
-    public Nif(String nif) {
-        Nif = nif;
+    public Nif(String nif) throws IncorrectNifException {
+        if (nif.length() != 9) {
+            throw new IncorrectNifException();
+        } else if (!Character.isLetter(nif.charAt(nif.length() - 1))) {
+            throw new IncorrectNifException();
+        }
+        this.Nif = nif;
+        this.correctNif = true;
     }
 
     public String getNif() {
