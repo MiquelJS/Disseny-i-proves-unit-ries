@@ -27,6 +27,6 @@ public class ElectoralOrganismSpy implements ElectoralOrganism {
     public DigitalSignature askForDigitalSignature(Party party) {
         String s = "Digital Signature for ";
         digitalSignature = s.concat(party.getName());
-        return new DigitalSignature(s.concat(party.getName()).getBytes());
+        return new DigitalSignature(digitalSignature.getBytes());
     }
 }

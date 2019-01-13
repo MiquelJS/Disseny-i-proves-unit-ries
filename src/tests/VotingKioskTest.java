@@ -18,6 +18,7 @@ public class VotingKioskTest {
 
     private Party votedParty;
     private VotingKiosk votingKiosk;
+    private ElectoralOrganismSpy eO;
 
     @BeforeEach
     void set() {
@@ -25,6 +26,8 @@ public class VotingKioskTest {
         Party anotherParty = new Party("VOX");
 
         this.votingKiosk = new VotingKiosk(new HashSet<>(Arrays.asList(votedParty,anotherParty)));
+        this.eO = new ElectoralOrganismSpy();
+        this.votingKiosk.setElectoralOrganism(eO);
     }
 
     @Test
@@ -35,7 +38,8 @@ public class VotingKioskTest {
     }
 
     @Test
-    void voteNonExitingParty() {
+    void voteNonExitingParty() throws IncorrectNifException {
+        votingKiosk.setNif(new Nif("48250721X"));
         Party nonExistingParty = new Party("Perico");
         assertThrows(NoPartyException.class, () -> votingKiosk.vote(nonExistingParty));
     }
@@ -49,9 +53,7 @@ public class VotingKioskTest {
 
     @Test
     void sendReceiptTest() {
-        ElectoralOrganismSpy eos = new ElectoralOrganismSpy();
         MailerServiceSpy mss = new MailerServiceSpy();
-        votingKiosk.setElectoralOrganism(eos);
         votingKiosk.setMailerService(mss);
         votingKiosk.setPartyToSign(new Party("Miquel's potatoes"));
 
