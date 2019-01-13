@@ -1,6 +1,7 @@
 package tests;
 import static org.junit.jupiter.api.Assertions.*;
 
+import data.MailAddress;
 import data.Nif;
 import data.Party;
 import exceptions.NoPartyException;
@@ -62,5 +63,10 @@ public class VotingKioskTest {
         MailerServiceSpy mss = new MailerServiceSpy();
         votingKiosk.setElectoralOrganism(eos);
         votingKiosk.setMailerService(mss);
+        votingKiosk.setPartyToSign(new Party("Miquel's potatoes"));
+
+        votingKiosk.sendeReceipt(new MailAddress("mjs2@alumnes.udl.cat"));
+
+        assertTrue(mss.sentMail);
     }
 }

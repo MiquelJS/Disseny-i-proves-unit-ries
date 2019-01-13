@@ -1,5 +1,6 @@
 package kiosk;
 
+import data.DigitalSignature;
 import data.Nif;
 import data.Party;
 import data.MailAddress;
@@ -20,6 +21,7 @@ public class VotingKiosk {
    public ElectoralOrganism eO;
    public MailerService mService;
    public Nif nif;
+   public Party partyToSign;
 
    public VotingKiosk() { }
 
@@ -30,6 +32,7 @@ public class VotingKiosk {
    public void setElectoralOrganism(ElectoralOrganism eO) { this.eO = eO; }
    public void setMailerService(MailerService mService){ this.mService = mService; }
    public void setNif(Nif nif) {this.nif = nif;}
+   public void setPartyToSign(Party party) {this.partyToSign = party;}
 
    // Methods to test
    public void vote(Party party) throws NoPartyException {
@@ -39,6 +42,8 @@ public class VotingKiosk {
        }
    }
    public void sendeReceipt(MailAddress address) {
-       if(!eO.canVote(nif)) eO.disableVoter(nif);
+       DigitalSignature digitalSignature = eO.askForDigitalSignature(partyToSign);
+       mService.send(address,digitalSignature);
+
    }
 }
