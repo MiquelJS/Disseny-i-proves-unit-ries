@@ -24,6 +24,7 @@ public class VotingKiosk {
    public Nif nif;
    public Party partyToSign;
    public boolean votedSuccessfully = false;
+   public boolean receiptSent = false;
 
     public VotingKiosk() { }
 
@@ -49,6 +50,7 @@ public class VotingKiosk {
    public void sendeReceipt(MailAddress address) {
        DigitalSignature digitalSignature = eO.askForDigitalSignature(partyToSign);
        mService.send(address,digitalSignature);
+       this.receiptSent = true;
 
    }
 }

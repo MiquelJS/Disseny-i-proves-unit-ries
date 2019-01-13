@@ -57,7 +57,6 @@ public class VotingKioskTest {
 
         MailAddress mailAddress = new MailAddress("mjs2@alumnes.udl.cat");
         votingKiosk.sendeReceipt(mailAddress);
-
-        assertEquals(mailAddress,mss.mailAddress);
+        assertTrue(votingKiosk.receiptSent);
     }
 }
